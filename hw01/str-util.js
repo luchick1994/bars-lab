@@ -25,6 +25,16 @@
  * @return {String} отформатированная строка.
  */
 
+function format(token, values) {
+
+	if(arguments.length < str.length + token.length){
+ 		throw new Error("Invalid arguments");
+ 	}
+     
+     var mixed = null;
+
+     return mixed;
+}
 /**
  * Задание 2. Создать функцию repeat.
  *
@@ -43,6 +53,19 @@
  *
  * @return {String} Строка с повотрениями.
  */
+function repeat (str, count) {
+
+var strs = null;
+
+while(count > 0) {
+
+    strs = strs + str;
+        count--;
+    }
+     
+
+ return strs;
+}
 
 /**
  * Задание 3. Создать функцию toGetParams, формирующую из
@@ -56,6 +79,24 @@
  *
  * @return {String} строка параметров.
  */
+
+function toGetParams(obj) {
+  
+  var getParam = null;
+ 
+  for(key in obj) {
+  
+  if(getParam == null) {
+         getParam =  key + "=" + obj[key];
+    }
+ else {
+ getParam = getParam + "&" + key + "=" + obj[key];
+ }
+ }
+
+  return getParam;
+ 
+ }
 
 /**
  * Задание 4. Создать функцию formatUrl, формирующую из базового url и объекта
@@ -72,7 +113,26 @@
  *
  * @return {String} сформированный url.
  */
+ function formatUrl(url, obj)
+  {
+  
+ var getURL = null; 
+  
+ for(key in obj) {
 
+ if(getURL === null) {
+          key + obj[key];
+ }
+
+ else {
+  getURL = getURL + "&" + key + "=" + obj[key];
+  }
+
+ }
+   url = url + "?";
+
+  return url + getURL;
+ }
 /**
  * Задание 5. Создать функцию startsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента начинается со строки, переданной в качестве второго аргумента,
@@ -91,6 +151,17 @@
  * @return {Boolean} Результат проверки.
  */
 
+function startsWith(str, prefix) {
+
+      if(str.indexOf(prefix) === 0) {
+          return true;
+         }
+       else {
+          return false;
+  }
+  }
+
+
 /**
  * Задание 6. Создать функцию endsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента оканчивается на строку, переданную в качестве второго аргумента,
@@ -108,3 +179,15 @@
  *
  * @return {Boolean} Результат проверки.
  */
+ function endsWith(str, suffix) {
+
+  var ind = suffix.length;
+  var ends = substring(str.length - ind);
+  
+     if( ends === suffix){
+       return true;
+        }
+     else {
+       return false;
+  }
+  }
