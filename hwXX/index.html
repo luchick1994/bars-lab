@@ -1,48 +1,141 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Bars Lab HomeWork XX</title>
-        <link rel="shortcut icon" type="image/png" href="../libs/jasmine-1.3.1/jasmine_favicon.png">
-        <link rel="stylesheet" type="text/css" href="../libs/jasmine-1.3.1/jasmine.css">
-        <script type="text/javascript" src="../libs/jasmine-1.3.1/jasmine.js"></script>
-        <script type="text/javascript" src="../libs/jasmine-1.3.1/jasmine-html.js"></script>
+describe("Warrior:", function () {
+    it("Конструктор должен быть объявлен", function () {
+        expect(Warrior).toBeDefined();
+    });
 
-        <!-- include source files here... -->
+    it("Воин должен иметь имя и уровень", function () {
+        var warrior = new Warrior("Joda", 100);
+        expect(warrior.name).toBeDefined();
+        expect(warrior.level).toBeDefined();
+    });
 
-        <!-- include spec files here... -->
-        <script type="text/javascript" src="spec/basic.spec.js"></script>
+    it("Значения для имени и уровня воина получаем " +
+        "в качестве параметров конструктора", function () {
+            var warrior = new Warrior("Joda", 100);
+            expect(warrior.name).toEqual("Joda");
+            expect(warrior.level).toEqual(100);
+        });
+});
 
-        <script type="text/javascript">
-            (function() {
-                var jasmineEnv = jasmine.getEnv();
-                jasmineEnv.updateInterval = 1000;
+describe("Warrior.prototype:", function () {
+    it("Воин должен уметь атаковать", function () {
+        var darth = new Warrior("Darth Vader", 99);
+        expect(darth.attack).toBeDefined();
+        expect(darth.attack()).toEqual(9.9);
+    });
+});
 
-                var htmlReporter = new jasmine.HtmlReporter();
+describe("Jedi:", function () {
+    it("Конструктор Jedi должен быть объявлен", function () {
+        expect(Jedi).toBeDefined();
+    });
 
-                jasmineEnv.addReporter(htmlReporter);
+    it("Jedi должен наследоваться от Warrior", function () {
+        expect(Jedi.prototype.constructor).toEqual(Warrior);
+    });
 
-                jasmineEnv.specFilter = function(spec) {
-                    return htmlReporter.specFilter(spec);
-                };
+    it("Jedi получает имя и уровень", function () {
+        var joda = new Jedi("Joda", 100);
+        expect(joda.name).toEqual("Joda");
+        expect(joda.level).toEqual(100);
+    });
 
-                var currentWindowOnload = window.onload;
+    it("Jedi находится на светлой стороне", function () {
+        var joda = new Jedi("Joda", 100);
+        expect(joda.sideOfForce).toEqual("light");
+    });
+});
 
-                window.onload = function() {
-                    if (currentWindowOnload) {
-                        currentWindowOnload();
-                    }
-                    execJasmine();
-                };
+describe("Sith:", function () {
+    it("Конструктор Sith должен быть объявлен", function () {
+        expect(Sith).toBeDefined();
+    }); 
 
-                function execJasmine() {
-                    jasmineEnv.execute();
-                }
+    it("Sith должен наследоваться от Warrior", function () {
+        expect(Sith.prototype.constructor).toEqual(Warrior);
+    });
 
-            })();
-        </script>
-    </head>
-    <body>
-        
-    </body>
-</html>
+    it("Sith получает имя и уровень", function () {
+        var darth = new Sith("Darth Vader", 100);
+        expect(darth.name).toEqual("Darth Vader");
+        expect(darth.level).toEqual(100);
+    });
+
+    it("Sith находится на темной стороне", function () {
+        var darth = new Sith("Darth ", 100);
+        expect(darth.sideOfForce).toEqual("dark");
+    });
+});
+
+describe("Code: ", function () {
+    it("Воин должен уметь произносить свой кодекс", function () {
+        var warrior = new Warrior("Joda", 100);
+        expect(warrior.getCode).toBeDefined();
+    });
+
+    it("Каждый Jedi должен знать свой кодекс", function () {
+        var joda = new Jedi("Joda", 100);
+        expect(joda.getCode).toBeDefined();
+        expect(joda.getCode()).toEqual("Нет волнения — есть покой...");
+    });
+
+    it("Каждый Sith должен знать свой кодекс", function () {
+        var darth = new Sith("Darth ", 100);
+        expect(darth.getCode).toBeDefined();
+        expect(darth.getCode()).toEqual("Спокойствие — ложь, есть только страсть...");
+    });
+});
+
+describe("Sith.toDarkSide:", function () {
+    var palpatine, anakin, darth;
+    beforeEach(function () {
+        darth = new Sith("Darth Vader", 1000);
+        palpatine = new Sith("Palpatine", 1000);
+        anakin = new Jedi("Anakin Skywalker", 100);
+    });
+
+    it("Склонять на темную сторону можно только тех, кто на светлой - Джедаев", function () {
+        expect(function () {
+            palpatine.toDarkSide(darth);
+        }).toThrow(new Error("Invalid argument"));
+    });
+
+    it("Palpatine должен склонить Anakin Skywalker на темную сторону", function () {
+        palpatine.toDarkSide(anakin);
+        expect(palpatine.sideOfForce).toEqual("dark");
+        expect(anakin.sideOfForce).toEqual("dark");
+    });
+
+    it("У Anakin Skywalker не хватает сил склонить Palpatine на светлую сторону", function () {
+        anakin.toLightSide(palpatine);
+        expect(palpatine.sideOfForce).toEqual("dark");
+        expect(anakin.sideOfForce).toEqual("dark");
+    });
+});
+
+describe("Jedi.toLightSide:", function () {
+    var luke, darth, joda;
+    beforeEach(function () {
+        joda = new Jedi("Joda", 100);
+        darth = new Sith("Darth Vader", 1000);
+        luke = new Jedi("Like Skywalker", 1001);
+    });
+
+    it("Склонять на светлую сторону можно только тех, кто на темной - Ситхов", function () {
+        expect(function () {
+            joda.toLightSide(luke);
+        }).toThrow(new Error("Invalid argument"));
+    });
+
+    it("Вот что бы было, если бы Люк смог склонить отца на светлую сторону", function () {
+        luke.toLightSide(darth);
+        expect(darth.sideOfForce).toEqual("light");
+        expect(luke.sideOfForce).not.toEqual("dark");
+    });
+
+    it("У Дарта Вейдера не хватило силы склонить Люка на темную сторону", function () {
+        darth.toDarkSide(luke);
+        expect(darth.sideOfForce).toEqual("light");
+        expect(luke.sideOfForce).toEqual("light");
+    });
+});
