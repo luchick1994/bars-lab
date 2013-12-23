@@ -24,15 +24,14 @@
  *
  * @return {String} отформатированная строка.
  */
-
 function format(token, values) {
 
-	if(arguments.length < str.length + token.length){
- 		throw new Error("Invalid arguments");
- 	}
-     
-     var mixed = null;
-
+        if(values.length < token.length) {
+                 throw new Error("Invalid arguments count");
+         }
+                  
+       var mixed = token.replace(values, 'п'); // заменит  на п
+       
      return mixed;
 }
 /**
@@ -53,20 +52,14 @@ function format(token, values) {
  *
  * @return {String} Строка с повотрениями.
  */
-function repeat (str, count) {
+function repeat(str, count) {
 
-var strs = null;
-
-while(count > 0) {
-
-    strs = strs + str;
-        count--;
+	for (var i = 0; i <= count; i++) {
+        str1 += str + \u0020;
     }
-     
 
- return strs;
+    return str1;
 }
-
 /**
  * Задание 3. Создать функцию toGetParams, формирующую из
  * объекта строку параметров для GET-запроса.
@@ -79,25 +72,22 @@ while(count > 0) {
  *
  * @return {String} строка параметров.
  */
-
 function toGetParams(obj) {
   
-  var getParam = null;
+     var getQuery;
  
-  for(key in obj) {
+          for(key in obj) {
   
-  if(getParam == null) {
-         getParam =  key + "=" + obj[key];
-    }
- else {
- getParam = getParam + "&" + key + "=" + obj[key];
- }
+             if(getQuery === null) {
+                  getQuery =  key + "=" + obj[key];
+             } else {
+                   getQuery = getQuery + "&" + key + "=" + obj[key];
+           }
  }
 
-  return getParam;
+  return getQuery;
  
  }
-
 /**
  * Задание 4. Создать функцию formatUrl, формирующую из базового url и объекта
  * строку GET-запроса.
@@ -113,22 +103,17 @@ function toGetParams(obj) {
  *
  * @return {String} сформированный url.
  */
- function formatUrl(url, obj)
-  {
+ function formatUrl(url, obj) {
+            var getURL; 
   
- var getURL = null; 
-  
- for(key in obj) {
+            for(key in obj) {
+            	if(getURL === null) {
+                     key + obj[key];
+            } else {
+                 getURL = getURL + "&" + key + "=" + obj[key];
+          }
+      }
 
- if(getURL === null) {
-          key + obj[key];
- }
-
- else {
-  getURL = getURL + "&" + key + "=" + obj[key];
-  }
-
- }
    url = url + "?";
 
   return url + getURL;
@@ -150,18 +135,13 @@ function toGetParams(obj) {
  *
  * @return {Boolean} Результат проверки.
  */
-
 function startsWith(str, prefix) {
 
-      if(str.indexOf(prefix) === 0) {
+      if(str.seach(prefix) === 0 ) { 
           return true;
-         }
-       else {
-          return false;
+         } 
+      return false;
   }
-  }
-
-
 /**
  * Задание 6. Создать функцию endsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента оканчивается на строку, переданную в качестве второго аргумента,
@@ -181,10 +161,10 @@ function startsWith(str, prefix) {
  */
  function endsWith(str, suffix) {
 
-  var ind = suffix.length;
-  var ends = substring(str.length - ind);
+  var start = suffix.length;
+  var end = substring(str.length - start);
   
-     if( ends === suffix){
+     if( end === suffix){
        return true;
         }
      else {
