@@ -86,5 +86,5 @@ function nfib(n) {
                 first += second;
          }
 
-   return first && second;
+return first + " " + second;
 }
