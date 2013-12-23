@@ -5,7 +5,7 @@
 
           <meta charset="utf-8" />
 	      <link rel="stylesheet" href="Style.css">
-          <title>Simple Excel</title>
+          <title> Simple Excel </title>
 
    </head>
 
@@ -16,29 +16,26 @@
     <input type="button" value="Create Table" onclick="createTable()" />
     <input type="button" value="Add Row" onclick="addRow()" />
     <input type="button" value="Add Column" onclick="addColumn()" />
-    <div id ="1"> </div>
+    <div id ="1"> </div> 
   
-
       <script language="javascript">
+
 	          var count = 1;
 
 
-      function createTable() {
+      function createTable() { 
 
-              var table = document.getElementById('1');
-              table.innerHTML += '<table id= "myTable" bordercolor="black" border="1" width="100%" ></table>';
-
+              var table = document.getElementById('1'); // metod objecta document , return ssilka na uzel documenta, kotoryui mozhno usat' for change svoistva
+              table.innerHTML += '<table id= "myTable" bordercolor="black" border="1" width="100%" > </table>'; // inner htnl razmetka stranici dostup vnytri tega 
              }
 
       function addRow() {
 
 	      var table = document.getElementById('myTable');
               var a = '';
-              a += '<tr>';
-
+              a += '<tr>'; // stroka
           for (var i =0; i < count; i++ ) {
-	          a += '<td contenteditable="true"></td>';
-            
+	          a += '<td contenteditable="true"> </td>';    // redactor     
            }
               a += '</tr>';
               table.innerHTML += a;
@@ -46,11 +43,10 @@
 
       function addColumn() {
 
-           var ted = document.getElementsByTagName("TR"); //massiv strok
+           var ted = document.getElementsByTagName("TR"); //massiv strok 
            for (var i=0; i < ted.length; i++) {
-                   ted[i].innerHTML +=  '<td contenteditable="true"></td>';
+                   ted[i].innerHTML +=  '<td contenteditable="true"> </td>';
             }
-
             count++;        
        }
 
