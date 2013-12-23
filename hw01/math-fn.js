@@ -50,19 +50,18 @@
  * @param {Number} n
  * Число, для которого считается факториал.
  * 
- * @return {Number} факториал числа.**/
-    function factorial(n) {
+ * @return {Number} факториал числа.
+ */
+function factorial(n) {
 
- 	       var fact = 1;
+                var fact = 1;
 
- 	             for(var i= 1; i <= n; i++) {
-                 fact = fact*i;
+                      for(var i= 1; i <= n ; i++) {
+                          fact = fact*i;
                 }
 
     return fact;
  }
-
-
 /**
  * Задание 2. Создать функцию nfib для подсчета n-го числа Фибоначчи
  * (http://ru.wikipedia.org/wiki/Числа_Фибоначчи)
@@ -75,16 +74,17 @@
  * @param {Number} n
  * Порядковый номер.
  *
- * @return {Number} Число Фибоначчи.
+ * @return {Number} Число Фибоначчи. // nfib( n - 1) + nfib( n - 2 );
  */
 function nfib(n) {
-	var second=1;
-	var first = 1;
 
-         while( first  <= n) {
-                second+=first;
-                first+=second;
-            return first;
+        var second = 0;
+        var first = 0;
 
-}
+         while ( first  <= n ) {
+                second += first;
+                first += second;
+         }
+
+   return first && second;
 }
