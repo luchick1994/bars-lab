@@ -1,0 +1,10 @@
+body {
+    background: #55DFBA;
+    font-family: 'Miltonian Tattoo', cursive;
+	width: 960px;
+    margin: auto;
+	}
+	* { 
+padding: 0;
+margin: 0; 
+}
