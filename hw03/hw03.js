@@ -26,10 +26,10 @@ var hulk = (function(){
  */
     Hulker.prototype.addClass = function(clsNames){
         var i;
-        for (i = 0; i < this.elements.length; i++){
-            this.elements[i].classList.add(clsNames);
-        }
-    }
+	      for (var i = 0; i < this.elements.length; i++) {
+		     this.elements[i].className += " " + clsNames;
+	   }
+     };
 /**
  * @method append
  * Добавляет дочерний html-элемент каждому элементу выборки.
